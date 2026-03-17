@@ -1,0 +1,41 @@
+n=0
+soma=0.0
+valor = '1'
+valores = []
+
+while valor != '0':
+
+    print("Lista atual", valores)
+    valor = input("Digite um número(0 para parar, del para apagar o útimo digito):")
+    print("\n")
+
+    if valor == 'del':
+        if valores == []:
+            n=1
+            break
+
+        else :
+            soma = soma - valores[-1]
+            n = n - 1
+            valor = 0
+            del valores [-1]
+            print("Numero apagado")
+
+    elif valor == '0':
+        break
+
+    else:
+        soma = soma + float(valor)
+        n = n + 1
+        valores.append(float(valor))
+
+if n != 0:
+    media = soma/n
+
+if valor == 'del' and valores == []:
+    print("ERRO: Lista vazia")
+elif valor == '0' and valores == []:
+    print("Programa encerrado")
+else:
+    print("A media entre", valores,"é igual a ", media)
+    print("Programa encerrado")
