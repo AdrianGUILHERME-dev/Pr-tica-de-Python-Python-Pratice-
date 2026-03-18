@@ -2,27 +2,43 @@ n=0
 soma=0.0
 valor = '1'
 valores = []
+vazio = []
+
+print("CALCULADORA DE MÉDIA\n\n")
+print("Instruções: \n'0' para encerrar e exibir o resultado.\n'del' para apagar dado na posição especificada. \n ")
 
 while valor != '0':
+
+#Mostra a lista de dados atual e recebe o próximo valor a ser adicionado.
 
     print("Lista atual", valores)
     valor = input("Digite um número(0 para parar, del para apagar o útimo digito):")
     print("\n")
 
+#Verifica qual opção foi selecionada e responde de acordo
+    #(Del)- Se a lista estiver vazia = mensagem de erro, se não, deleta o termo na posição especificada ou tudo caso seja selecionado o 'all'.
+
     if valor == 'del':
         if valores == []:
-            n=1
             break
 
         else :
-            soma = soma - valores[-1]
-            n = n - 1
-            valor = 0
-            del valores [-1]
-            print("Numero apagado")
+            posicao=input("Qual elemento? (Digite a posição, 'all' para apagar todos)")
+            if posicao != 'all':
+                soma = soma - valores[int(posicao) - 1]
+                n = n - 1
+                valor = 0
+                print("Número", valores[int(posicao) - 1]," apagado.")
+                del valores[int(posicao) - 1]
+            elif posicao == 'all':
+                valores = vazio
+
+    #(0) - Comando de encerramento de loop. Para a execução e se houverem dados na lista, mostra a media na tela.
 
     elif valor == '0':
         break
+
+    #(Qualquer número) - Acrescenta o valor especificado a lista e incrementa a contagem de elementos em 1.
 
     else:
         soma = soma + float(valor)
