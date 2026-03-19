@@ -5,53 +5,79 @@ valores = []
 vazio = []
 
 print("CALCULADORA DE MÉDIA\n\n")
-print("Instruções: \n'0' para encerrar e exibir o resultado.\n'del' para apagar dado na posição especificada. \n ")
+print("Instruções: \n'0' para encerrar e exibir o resultado.\n'del' para apagar dado na posição especificada. \n'all' para apagar todos os elementos.\n'media' mostra a media entre os termos listados.\n")
 
 while valor != '0':
 
 #Mostra a lista de dados atual e recebe o próximo valor a ser adicionado.
 
     print("Lista atual", valores)
-    valor = input("Digite um número(0 para parar, del para apagar o útimo digito):")
+    valor = input("Digite um número ou comando:")
     print("\n")
 
 #Verifica qual opção foi selecionada e responde de acordo
     #(Del)- Se a lista estiver vazia = mensagem de erro, se não, deleta o termo na posição especificada ou tudo caso seja selecionado o 'all'.
 
     if valor == 'del':
-        if valores == []:
-            break
+
+        if valores == vazio:
+            print("A lista está vazia")
+            continue
 
         else :
-            posicao=input("Qual elemento? (Digite a posição, 'all' para apagar todos)")
-            if posicao != 'all':
-                soma = soma - valores[int(posicao) - 1]
-                n = n - 1
-                valor = 0
-                print("Número", valores[int(posicao) - 1]," apagado.")
-                del valores[int(posicao) - 1]
+            try:
+                posicao=input("Qual elemento?") #Trata-se de uma string, para realizar operações matemáticas, adicione int() ou float()
+            except (ValueError, SyntaxError):
+                print("Digite valores válidos, somente inteiros")
+
+            if posicao != 'all' :
+
+                if int(posicao) > n or int(posicao) < 0 :
+                    print("ERRO: Posição inválida ou inexistente")
+
+                else:
+                    soma = soma - valores[int(posicao) - 1]
+                    n = n - 1
+                    valor = 0
+                    print("Número", valores[int(posicao) - 1]," apagado.")
+                    del valores[int(posicao) - 1]
+
             elif posicao == 'all':
+                print("Valores excluidos:", valores)
                 valores = vazio
+
 
     #(0) - Comando de encerramento de loop. Para a execução e se houverem dados na lista, mostra a media na tela.
 
     elif valor == '0':
+        print("Programa encerrado")
         break
 
     #(Qualquer número) - Acrescenta o valor especificado a lista e incrementa a contagem de elementos em 1.
 
+    elif valor == 'media':
+
+        if n > 0:
+            media = soma/n
+            print("A média entre ", valores,"é igual a ", media,"\n")
+            continue
+        else:
+            print("Não há valores listados.\n")
+            continue
+
+
     else:
-        soma = soma + float(valor)
-        n = n + 1
-        valores.append(float(valor))
+        try:
+            soma = soma + float(valor)
+            n = n + 1
+            valores.append(float(valor))
 
-if n != 0:
-    media = soma/n
+        except (ValueError, SyntaxError):
+            print("Digite apenas números!\n")
+            continue
 
-if valor == 'del' and valores == []:
-    print("ERRO: Lista vazia")
-elif valor == '0' and valores == []:
-    print("Programa encerrado")
-else:
-    print("A media entre", valores,"é igual a ", media)
-    print("Programa encerrado")
+
+
+
+
+
